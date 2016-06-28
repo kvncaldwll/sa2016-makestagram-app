@@ -23,15 +23,9 @@ class TimelineViewController: UIViewController {
     func takePhoto()
     {
         photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!) { (image: UIImage?) in
-            print("received callback")
-            if let image = image {
-                let imageData = UIImageJPEGRepresentation(image, 0.8)!
-                let imageFile = PFFile(name: "image", data: imageData)!
-                
-                let post = PFObject(className: "Post")
-                post["imageFile"] = imageFile
-                post.saveInBackground()
-            }
+            let post = Post()
+            post.image = image
+            post.uploadPost()
         }
     }
 }
