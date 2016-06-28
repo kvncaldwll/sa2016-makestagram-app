@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import Bond
 
 class PostTableViewCell: UITableViewCell {
 
     @IBOutlet weak var postImageView: UIImageView!
+    
+    var post: Post? {
+        didSet {
+            if let post = post {
+                post.image.bindTo(postImageView.bnd_image)
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

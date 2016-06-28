@@ -39,6 +39,7 @@
 		F479562F1D22F24200BD3789 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479562E1D22F24200BD3789 /* PhotoTakingHelper.swift */; };
 		F47956321D23120E00BD3789 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47956311D23120E00BD3789 /* Post.swift */; };
 		F47956361D23279D00BD3789 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47956351D23279D00BD3789 /* PostTableViewCell.swift */; };
+		F47956381D23329100BD3789 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47956371D23329100BD3789 /* ParseHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		F479562E1D22F24200BD3789 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		F47956311D23120E00BD3789 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F47956351D23279D00BD3789 /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		F47956371D23329100BD3789 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		F9C1EE827CE78C2425ADFAEB /* Pods-Makestagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Makestagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Makestagram/Pods-Makestagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 			children = (
 				6277189D1B0A58E800AF5C6E /* ErrorHandling.swift */,
 				6277189E1B0A58E800AF5C6E /* ParseLoginHelper.swift */,
+				F47956371D23329100BD3789 /* ParseHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				F47956281D22EE0000BD3789 /* PhotoViewController.swift in Sources */,
 				62C8C1E61B06BD6500DC3EA7 /* AppDelegate.swift in Sources */,
 				627718971B0A581700AF5C6E /* FilterViewController.swift in Sources */,
+				F47956381D23329100BD3789 /* ParseHelper.swift in Sources */,
 				F47956361D23279D00BD3789 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
