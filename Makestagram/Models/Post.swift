@@ -14,8 +14,11 @@ class Post: PFObject, PFSubclassing {
     
     @NSManaged var imageFile: PFFile?
     @NSManaged var user: PFUser?
+    
     var image: Observable<UIImage?> = Observable(nil)
     var photoUploadTask: UIBackgroundTaskIdentifier?
+    
+    var likes: Observable<[PFUser]?> = Observable(nil)
     
     static func parseClassName() -> String {
         return "Post"
@@ -32,6 +35,7 @@ class Post: PFObject, PFSubclassing {
         }
     }
     
+    // MARK: upload post
     func uploadPost() {
         if let image = image.value {
             
@@ -51,6 +55,7 @@ class Post: PFObject, PFSubclassing {
         }
     }
     
+    // MARK: download images in bg
     func downloadImage () {
         if (image.value == nil) {
             imageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
@@ -59,6 +64,41 @@ class Post: PFObject, PFSubclassing {
                     self.image.value = image
                 }
             }
+        }
+    }
+    
+    // MARK: find user's post likes
+    func fetchLikes() {
+        if likes.value != nil {
+            return
+        }
+        
+        ParseHelper.likesForPost(self, completionBlock: { (likes: [PFObject]?, error: NSError?) -> Void in
+            let validLikes = likes?.filter {like in like[ParseHelper.ParseLikeFromUser] != nil}
+            
+            self.likes.value = validLikes?.map { like in let fromUser = like[ParseHelper.ParseLikeFromUser] as! PFUser
+                return fromUser
+            }
+        })
+    }
+    
+    // MARK: has user liked a post or not
+    func doesUserLikePost(user: PFUser) -> Bool {
+        if let likes = likes.value {
+            return likes.contains(user)
+        } else {
+            return false
+        }
+    }
+    
+    // MARK: set like/unlike button for post
+    func toggleLikePost(user: PFUser) {
+        if (doesUserLikePost(user)) {
+            likes.value = likes.value?.filter {$0 != user}
+            ParseHelper.unlikePost(user, post: self)
+        } else {
+            likes.value?.append(user)
+            ParseHelper.likePost(user, post: self)
         }
     }
 }
