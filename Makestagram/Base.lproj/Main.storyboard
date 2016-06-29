@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Photo View Controller-->
@@ -42,19 +43,80 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="531"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="470" id="HWu-ll-Jqv" customClass="PostTableViewCell" customModule="Makestagram" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="470" id="HWu-ll-Jqv" customClass="PostTableViewCell" customModule="Makestagram" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="470"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HWu-ll-Jqv" id="ce4-Zy-WJO">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="469.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zxN-Oa-Frb">
-                                                    <rect key="frame" x="8" y="0.0" width="584" height="311.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zxN-Oa-Frb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="344"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="344" id="M9b-Zt-WQe"/>
+                                                    </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzf-uk-Zdn" userLabel="Like">
+                                                    <rect key="frame" x="544" y="401" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Cw7-bY-SWs"/>
+                                                        <constraint firstAttribute="width" constant="44" id="cs5-Om-ORG"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                                                    <state key="normal" image="heart"/>
+                                                    <state key="selected" image="heart_selected"/>
+                                                    <connections>
+                                                        <action selector="likeButtonTapped:" destination="HWu-ll-Jqv" eventType="touchUpInside" id="Hdd-tu-Sh0"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a84-Nk-1Qe" userLabel="More">
+                                                    <rect key="frame" x="8" y="407" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="OSN-3z-jHw"/>
+                                                        <constraint firstAttribute="width" constant="44" id="UGh-KT-kCc"/>
+                                                    </constraints>
+                                                    <state key="normal" image="more"/>
+                                                    <connections>
+                                                        <action selector="moreButtonTapped:" destination="HWu-ll-Jqv" eventType="touchUpInside" id="8Ef-1J-Jf0"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="LzR-NB-01r">
+                                                    <rect key="frame" x="20" y="367" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="57A-vk-XsO"/>
+                                                        <constraint firstAttribute="width" constant="20" id="A1O-6n-7T5"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fy-nC-II3">
+                                                    <rect key="frame" x="60" y="366" width="482" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="EDk-bs-Lnc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="a84-Nk-1Qe" secondAttribute="bottom" constant="10" id="ASq-H6-no5"/>
+                                                <constraint firstItem="LzR-NB-01r" firstAttribute="leading" secondItem="ce4-Zy-WJO" secondAttribute="leadingMargin" constant="12" id="Fao-5I-OjK"/>
+                                                <constraint firstItem="8Fy-nC-II3" firstAttribute="leading" secondItem="LzR-NB-01r" secondAttribute="trailing" constant="20" id="KtX-XZ-F9n"/>
+                                                <constraint firstItem="zxN-Oa-Frb" firstAttribute="top" secondItem="ce4-Zy-WJO" secondAttribute="top" id="YDr-oG-JEP"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qzf-uk-Zdn" secondAttribute="trailing" constant="4" id="ZJT-XY-7Gq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qzf-uk-Zdn" secondAttribute="bottom" constant="16" id="Zuh-yf-k22"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8Fy-nC-II3" secondAttribute="trailing" constant="50" id="gBZ-dy-oiK"/>
+                                                <constraint firstAttribute="trailing" secondItem="zxN-Oa-Frb" secondAttribute="trailing" id="nar-Fo-JfA"/>
+                                                <constraint firstItem="a84-Nk-1Qe" firstAttribute="top" secondItem="LzR-NB-01r" secondAttribute="bottom" constant="20" id="rWL-CE-euL"/>
+                                                <constraint firstItem="zxN-Oa-Frb" firstAttribute="leading" secondItem="ce4-Zy-WJO" secondAttribute="leading" id="t3u-n1-SOd"/>
+                                                <constraint firstItem="a84-Nk-1Qe" firstAttribute="top" secondItem="8Fy-nC-II3" secondAttribute="bottom" constant="20" id="xg5-6y-J0f"/>
+                                                <constraint firstItem="a84-Nk-1Qe" firstAttribute="leading" secondItem="ce4-Zy-WJO" secondAttribute="leadingMargin" id="yIt-Ea-VNi"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeButton" destination="qzf-uk-Zdn" id="UQG-Nd-QaX"/>
+                                            <outlet property="likesIconImageView" destination="LzR-NB-01r" id="oTs-BF-xgq"/>
+                                            <outlet property="likesLabel" destination="8Fy-nC-II3" id="sZb-jx-hFY"/>
+                                            <outlet property="moreButton" destination="a84-Nk-1Qe" id="hAn-Uc-5iA"/>
                                             <outlet property="postImageView" destination="zxN-Oa-Frb" id="jim-xf-SRU"/>
                                         </connections>
                                     </tableViewCell>
@@ -126,7 +188,10 @@
     </scenes>
     <resources>
         <image name="camera" width="40" height="30"/>
+        <image name="heart" width="72" height="68"/>
+        <image name="heart_selected" width="72" height="68"/>
         <image name="home" width="38" height="36"/>
+        <image name="more" width="26" height="17"/>
         <image name="people" width="42" height="42"/>
     </resources>
 </document>
