@@ -11,7 +11,10 @@ import Bond
 import Parse
 
 class PostTableViewCell: UITableViewCell {
-
+    
+    var postDisposable: DisposableType?
+    var likeDisposable: DisposableType?
+    
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var likesIconImageView: UIImageView!
     @IBOutlet weak var likesLabel: UILabel!
@@ -29,10 +32,30 @@ class PostTableViewCell: UITableViewCell {
     
     var post: Post? {
         didSet {
+            postDisposable?.dispose()
+            likeDisposable?.dispose()
+            
             if let post = post {
-                post.image.bindTo(postImageView.bnd_image)
+                postDisposable = post.image.bindTo(postImageView.bnd_image)
+                likeDisposable = post.likes.observe { (value: [PFUser]?) -> () in
+                    if let value = value {
+                        self.likesLabel.text = self.stringFromUserlist(value)
+                        self.likeButton.selected = value.contains(PFUser.currentUser()!)
+                        self.likesIconImageView.hidden = (value.count == 0)
+                    } else {
+                        self.likesLabel.text = ""
+                        self.likeButton.selected = false
+                        self.likesIconImageView.hidden = true
+                    }
+                }
             }
         }
+    }
+    
+    func stringFromUserlist(userList: [PFUser]) -> String {
+        let usernameList = userList.map {user in user.username!}
+        let commaSeparatedUserList = usernameList.joinWithSeparator(", ")
+        return commaSeparatedUserList
     }
     
     override func awakeFromNib() {

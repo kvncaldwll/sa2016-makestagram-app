@@ -123,6 +123,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="UUK-YV-ic3" id="9SX-cx-iJj"/>
+                                    <outlet property="delegate" destination="UUK-YV-ic3" id="HIl-Je-JE7"/>
                                 </connections>
                             </tableView>
                         </subviews>
