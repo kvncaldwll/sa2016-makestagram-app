@@ -82,6 +82,57 @@ class ParseHelper {
         query.includeKey(ParseLikeFromUser)
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
+    
+    // MARK: fetch following of users
+    static func getFollowingUsersForUser(user: PFUser, completionBlock: PFQueryArrayResultBlock) {
+        let query = PFQuery(className: ParseFollowClass)
+        query.whereKey(ParseFollowFromUser, equalTo: user)
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+    }
+    
+    // MARK: create follow relation between two users
+    static func addFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
+        let followObject = PFObject(className: ParseFollowClass)
+        followObject.setObject(user, forKey: ParseFollowFromUser)
+        followObject.setObject(toUser, forKey: ParseFollowToUser)
+        followObject.saveInBackgroundWithBlock(nil)
+    }
+    
+    // MARK: delete follow relationship
+    static func deleteFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
+        let query = PFQuery(className: ParseFollowClass)
+        query.whereKey(ParseFollowFromUser, equalTo: user)
+        query.whereKey(ParseFollowToUser, equalTo: toUser)
+        query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
+            let results = results ?? []
+            for follow in results {
+                follow.deleteInBackgroundWithBlock(nil)
+            }
+        }
+    }
+    
+    // MARK: fetch all users
+    static func allUsers(completionBlock: PFQueryArrayResultBlock) -> PFQuery {
+        let query = PFUser.query()!
+        // excludes current user
+        query.whereKey(ParseHelper.ParseUserUsername, notEqualTo: PFUser.currentUser()!.username!)
+        query.orderByAscending(ParseHelper.ParseUserUsername)
+        query.limit = 20
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+        return query
+    }
+    
+    // MARK: fetch searched username
+    static func searchUsers(searchText: String, completionBlock: PFQueryArrayResultBlock) -> PFQuery {
+        // using regex to pull case insensitive results (slow on large data sets)
+        let query = PFUser.query()!.whereKey(ParseHelper.ParseUserUsername, matchesRegex: searchText, modifiers: "i")
+        query.whereKey(ParseHelper.ParseUserUsername, notEqualTo: PFUser.currentUser()!.username!)
+        query.orderByAscending(ParseHelper.ParseUserUsername)
+        query.limit = 20
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+        return query
+    }
+    
 }
 
 extension PFObject {
